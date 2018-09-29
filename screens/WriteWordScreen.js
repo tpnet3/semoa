@@ -12,10 +12,20 @@ export default class WriteWordScreen extends React.Component {
     }
   }
 
+  static navigationOptions = {
+    title: 'moa 발행하기',
+  };
+
   postMoa = () => {
     const text = this.props.navigation.getParam('text', '');
     const word = this.props.navigation.getParam('word', '');
-    const uniqueId = DeviceInfo.getUniqueID();
+    let uniqueId = undefined;
+
+    try {
+      uniqueId = DeviceInfo.getUniqueID();
+    } catch(e) {
+      // Ignore
+    }
 
     return fetch('https://semoa-4225b.firebaseio.com/moa.json', {
       method: 'POST',
@@ -31,8 +41,7 @@ export default class WriteWordScreen extends React.Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson);
-      return responseJson;
+      this.props.navigation.pop();
     })
   }
 
@@ -43,12 +52,16 @@ export default class WriteWordScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.main}>
-          <Text>{text} X {word}</Text>
-          <TextInput
-            multiline={true}
-            numberOfLines={4}
-            onChangeText={(moa) => this.setState({moa})}
-            value={this.state.moa}/>
+          <Text style={{alignSelf: 'center', fontSize: 24, marginTop: 24, padding: 24}}>{text}   X   {word}</Text>
+          <View style={{borderWidth: 1, borderColor: '#727272', padding: 16, margin: 24}}>
+            <TextInput
+              style={{height: 120, fontSize: 16}}
+              multiline={true}
+              textAlignVertical="top"
+              underlineColorAndroid="transparent"
+              onChangeText={(moa) => this.setState({moa})}
+              value={this.state.moa}/>
+          </View>
         </View>
         <SemoButton title="moa 발행" onPress={this.postMoa} />
       </View>
@@ -64,7 +77,5 @@ const styles = StyleSheet.create({
 
   main: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

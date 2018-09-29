@@ -14,6 +14,10 @@ export default class FindWordScreen extends React.Component {
     }
   }
 
+  static navigationOptions = {
+    title: 'moa 보기',
+  };
+
   updateRandomWord = () => {
 
     if ( ! this.state.text) {
@@ -78,7 +82,7 @@ const styles = StyleSheet.create({
   },
 
   word: {
-    fontSize: 36,
+    fontSize: 24,
     alignSelf: 'center',
     margin: 24
   },
@@ -88,17 +92,17 @@ const styles = StyleSheet.create({
     marginRight: 48,
     marginTop: 48,
     marginBottom: 24,
-    height: 96,
+    height: 72,
     textAlign: 'center',
-    fontSize: 36
+    fontSize: 24
   },
 
   textInputPlaceholder: {
-    fontSize: 18
+    fontSize: 16
   },
 
   multipleIcon: {
-    fontSize: 18,
+    fontSize: 16,
     alignSelf: 'center',
     color: '#424242'
   },
