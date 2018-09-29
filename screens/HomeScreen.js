@@ -3,6 +3,11 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import SemoButton from '../components/SemoButton'
 
 export default class HomeScreen extends React.Component {
+
+  constructor() {
+    super();
+  }
+
   render() {
     return (
       <View style={styles.container}>

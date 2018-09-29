@@ -8,7 +8,7 @@ export default class SemoButton extends React.Component {
     return (
       <View style={styles.semoBtn}>
         <Button
-          title="세모"
+          title={this.props.title || "세모"}
           onPress={this.props.onPress}
           backgroundColor="#1e357b"
         />
